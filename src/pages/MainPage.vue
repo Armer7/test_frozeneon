@@ -49,11 +49,15 @@ export default {
 
   watch: {
     async question() {
-      this.data = await RequestDataGet(
-        `${this.urlSearch}?text=${this.question}&size=${this.size}&from=${
-          10 * this.page - 9
-        }`
-      );
+      if (this.page === 1) {
+        this.data = await RequestDataGet(
+          `${this.urlSearch}?text=${this.question}&size=${this.size}&from=${
+            10 * this.page - 9
+          }`
+        );
+      } else {
+        this.page = 1;
+      }
     },
     async page() {
       this.data = await RequestDataGet(

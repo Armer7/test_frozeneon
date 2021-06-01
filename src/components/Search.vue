@@ -12,18 +12,21 @@
             v-model="searchText"
             :state="state"
             trim
-            @click="() => {this.state = null}"
-            @blur="inputSearch"></b-form-input>
+            @click="
+              () => {
+                this.state = null;
+              }
+            "
+            @blur="inputSearch"
+          ></b-form-input>
           <b-input-group-append>
-            <b-button variant="outline-dark" type="submit" >
+            <b-button variant="outline-dark" type="submit">
               <b-icon icon="search"></b-icon>
             </b-button>
           </b-input-group-append>
         </b-input-group>
       </b-form-group>
     </b-form>
-
-
   </div>
 </template>
 
@@ -35,27 +38,25 @@ export default {
     return {
       searchText: '',
       state: null,
-      invalidFeedback: 'Please enter something.'
-    }
+      invalidFeedback: 'Please enter something.',
+    };
   },
   methods: {
-    inputSearch () {
-      if (this.searchText.length < 3) {
-         this.state = false;
-         return;
-       }
-      if(this.searchText.length > 0 && this.searchText.length < 4) {
-        this.invalidFeedback = 'Enter at least 3 characters.'
-        return
+    inputSearch() {
+      // if (this.searchText.length < 3) {
+      //
+      //   return;
+      // }
+      if (this.searchText.length >= 0 && this.searchText.length < 3) {
+        this.invalidFeedback = 'Enter at least 3 characters.';
+        this.state = false;
+        return;
       }
-      this.$emit('getSearchText',this.searchText)
-
-    }
-  }
-
-}
+      this.state = true;
+      this.$emit('getSearchText', this.searchText);
+    },
+  },
+};
 </script>
 
-<style scoped lang = 'scss'>
-
-</style>
+<style scoped lang="scss"></style>
